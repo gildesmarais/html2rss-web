@@ -19,13 +19,13 @@ confinement: strict
 parts:
   web:
     plugin: nil
-    build-packages: [ruby]
+    build-packages: [ruby, libffi-dev, libc-dev, build-essential, patch, ruby-dev, zlib1g-dev, liblzma-dev]
     source: '.'
     override-build: |
       snapcraftctl build
       gem install --user-install --no-document bundler:'~> 1.0' foreman:'< 1'
       bundle config --global frozen 1
-      bundle install --binstubs --retry=5 --jobs=7 --without development test
+      bundle install --path vendor/bundle --binstubs --retry=5 --jobs=7 --without development test
 
 apps:
   web:
