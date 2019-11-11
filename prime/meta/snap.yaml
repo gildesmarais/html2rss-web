@@ -1,5 +1,5 @@
 name: html2rss-web
-version: '0.1'
+version: 0+git.92099ae-dirty
 summary: Scrapes websites and provides valid RSS 2.0 feeds.
 description: |
   Builds and serves RSS feeds via HTTP with the help of the html2rss gem.
