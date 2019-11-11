@@ -36,11 +36,13 @@ sudo apt install snapd
 sudo snap install html2rss-web
 ```
 
+TODO: add instructions to use own feed configs via `feeds.yml`
+
 ## Deployment with Docker
 
 Install Docker CE and `docker run -d -p 3000:3000 gilcreator/html2rss-web`.
 
-To use your private _feed configs_, mount a `feed.yml` into the `/app/config/` folder.
+To use your private _feed configs_, mount a `feeds.yml` into the `/app/config/` folder.
 
 ```bash
 docker run -d --name html2rss-web \
@@ -64,10 +66,10 @@ docker run -d --name html2rss-web --restart=always -p 3000:3000  \
   gilcreator/html2rss-web
 ```
 
-The cronjob for updating every 30 minutes could look like this:
+The cronjob for updating every 4 hours could look like this:
 
 ```
-*/30 *  * * * /home/deploy/html2rss-web/update > /dev/null 2>&1
+* */4  * * * /home/deploy/html2rss-web/update > /dev/null 2>&1
 ```
 
 ## Heroku one-click deployment
