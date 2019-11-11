@@ -1,0 +1,37 @@
+name: html2rss-web # you probably want to 'snapcraft register <name>'
+base: core18
+version: 'git'
+summary: Scrapes websites and provides valid RSS 2.0 feeds.
+description: |
+  Builds and serves RSS feeds via HTTP with the help of the html2rss gem.
+
+  Builds feeds for many websites already, but you can configure our own feeds.
+  It's a well-behaving web citizen and handles caching and HTTP Cache-Headers.
+  https://github.com/gildesmarais/html2rss-web
+
+  Needs a config per site which contains CSS selectors
+  and optionally instructions for helping with information
+  extraction and processing.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: strict
+
+parts:
+  web:
+    plugin: nil
+    build-packages: [ruby]
+    source: '.'
+    override-build: |
+      snapcraftctl build
+      gem install --no-document bundler:'~> 1.0' foreman:'< 1'
+      bundle config --global frozen 1
+      bundle install --binstubs --retry=5 --jobs=7 --without development test
+
+apps:
+  web:
+    command: foreman start
+    daemon: simple
+    restart-condition: always
+    plugs:
+      - network
+      - network-bind

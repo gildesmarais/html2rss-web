@@ -28,13 +28,21 @@ The corresponding URL:
 
 👉 [See file list of all `html2rss-configs`.](https://github.com/gildesmarais/html2rss-configs/tree/master/lib/html2rss/configs)
 
+## Deployment with Snap
+
+```bash
+sudo apt update
+sudo apt install snapd
+sudo snap install html2rss-web
+```
+
 ## Deployment with Docker
 
 Install Docker CE and `docker run -d -p 3000:3000 gilcreator/html2rss-web`.
 
 To use your private _feed configs_, mount a `feed.yml` into the `/app/config/` folder.
 
-```
+```bash
 docker run -d --name html2rss-web \
   --mount type=bind,source="/path/to/your/config/folder,target=/app/config" \
   -p 3000:3000 \
@@ -71,7 +79,7 @@ instance yourself.
 
 ## Run it locally
 
-1. Install Ruby `>= 2.6`.
+1. Install Ruby `>= 2.5`.
 2. `gem install bundler foreman`
 3. `bundle`
 4. `foreman start`

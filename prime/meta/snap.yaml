@@ -1,0 +1,26 @@
+name: html2rss-web
+version: '0.1'
+summary: Scrapes websites and provides valid RSS 2.0 feeds.
+description: |
+  Builds and serves RSS feeds via HTTP with the help of the html2rss gem.
+
+  Builds feeds for many websites already, but you can configure our own feeds.
+  It's a well-behaving web citizen and handles caching and HTTP Cache-Headers.
+  https://github.com/gildesmarais/html2rss-web
+
+  Needs a config per site which contains CSS selectors
+  and optionally instructions for helping with information
+  extraction and processing.
+base: core18
+architectures:
+- amd64
+confinement: strict
+grade: devel
+apps:
+  web:
+    command: snap/command-chain/snapcraft-runner $SNAP/command-web.wrapper
+    daemon: simple
+    plugs:
+    - network
+    - network-bind
+    restart-condition: always
