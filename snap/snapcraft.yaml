@@ -23,7 +23,7 @@ parts:
     source: '.'
     override-build: |
       snapcraftctl build
-      sudo gem install --no-document bundler:'~> 1.0' foreman:'< 1'
+      gem install --user-install --no-document bundler:'~> 1.0' foreman:'< 1'
       bundle config --global frozen 1
       bundle install --binstubs --retry=5 --jobs=7 --without development test
 
